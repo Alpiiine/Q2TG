@@ -8,7 +8,7 @@ import {
   GroupPokeEvent,
   MemberIncreaseEvent,
   PrivateMessageEvent,
-} from 'oicq';
+} from '@alpiiine/oicq';
 import db from '../models/db';
 import { Api } from 'telegram';
 import { getLogger, Logger } from 'log4js';

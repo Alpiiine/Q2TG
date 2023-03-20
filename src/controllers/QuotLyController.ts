@@ -2,12 +2,12 @@ import Instance from '../models/Instance';
 import Telegram from '../client/Telegram';
 import OicqClient from '../client/OicqClient';
 import { getLogger, Logger } from 'log4js';
-import { GroupMessageEvent, PrivateMessageEvent } from 'oicq';
+import { GroupMessageEvent, PrivateMessageEvent } from '@alpiiine/oicq';
 import { Api } from 'telegram';
 import quotly from 'quote-api/methods/generate.js';
 import { CustomFile } from 'telegram/client/uploads';
 import db from '../models/db';
-import { Message } from '@prisma/client';
+
 import BigInteger from 'big-integer';
 import { getAvatarUrl } from '../utils/urls';
 import convert from '../helpers/convert';
@@ -97,7 +97,7 @@ export default class {
     }
   };
 
-  private async genQuote(message: Message) {
+  private async genQuote(message: any) {
     const GROUP_ANONYMOUS_BOT = 1087968824n;
 
     const backgroundColor = '#292232';
@@ -281,7 +281,7 @@ export default class {
     return Buffer.from(res.image, 'base64');
   }
 
-  private async sendQuote(pair: Pair, message: Message) {
+  private async sendQuote(pair: Pair, message: any) {
     const image = await this.genQuote(message);
 
     const tgMessage = await pair.tg.sendMessage({

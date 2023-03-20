@@ -5,6 +5,22 @@ __metadata:
   version: 5
   cacheKey: 8
 
+"@alpiiine/oicq@https://github.com/Alpiiine/oicq/releases/download/v0.0.10/alpiiine-oicq-0.0.10.tgz":
+  version: 0.0.10
+  resolution: "@alpiiine/oicq@https://github.com/Alpiiine/oicq/releases/download/v0.0.10/alpiiine-oicq-0.0.10.tgz"
+  dependencies:
+    "@types/lodash": ^4.14.192
+    axios: ^1.1.2
+    lodash: ^4.17.21
+    log4js: ^6.3.0
+    long: ^4.0.0
+    pngjs: ^6.0.0
+    probe-image-size: ^7.2.2
+    triptrap: ^0.0.16
+  checksum: b57fc0a5c19bbc50aa840c3c81c208403532a040080a1a0a10170cb93f9a893dd2a96966086a8538db570cbaa145d5fd2f359ffe5893faca813722654393c655
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.7.2":
   version: 7.20.7
   resolution: "@babel/runtime@npm:7.20.7"
@@ -619,6 +635,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4.14.192":
+  version: 4.14.192
+  resolution: "@types/lodash@npm:4.14.192"
+  checksum: 31e1f0543a04158d2c429c45efd7c77882736630d0652f82eb337d6159ec0c249c5d175c0af731537b53271e665ff8d76f43221d75d03646d31cb4bd6f0056b1
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*":
   version: 17.0.21
   resolution: "@types/node@npm:17.0.21"
@@ -901,13 +924,13 @@ __metadata:
   linkType: hard
 
 "axios@npm:^1.1.2":
-  version: 1.2.1
-  resolution: "axios@npm:1.2.1"
+  version: 1.3.4
+  resolution: "axios@npm:1.3.4"
   dependencies:
     follow-redirects: ^1.15.0
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
-  checksum: c4dc4e119064c9aed09a3de309bedb797a139a6fb372223aafe3e0c10a7d4a14e4d3e9c9d309467fadb9d2b490b891ee3df96ef5b55716bb971910466ff9f0c5
+  checksum: 7440edefcf8498bc3cdf39de00443e8101f249972c83b739c6e880d9d669fea9486372dbe8739e88b3bf8bb1ad15f6106693f206f078f4516fe8fd47b1c3093c
   languageName: node
   linkType: hard
 
@@ -1400,10 +1423,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-format@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "date-format@npm:4.0.3"
-  checksum: 8ae4d9de3532010169a89bc7b079342051ba3ec88552636aa677bfb53e8eb15113af8394679aea7d41367dc8bb6e9865da17f21ac2802202180b09d6e3f2339e
+"date-format@npm:^4.0.14":
+  version: 4.0.14
+  resolution: "date-format@npm:4.0.14"
+  checksum: dfe5139df6af5759b9dd3c007b899b3f60d45a9240ffeee6314ab74e6ab52e9b519a44ccf285888bdd6b626c66ee9b4c8a523075fa1140617b5beb1cbb9b18d1
   languageName: node
   linkType: hard
 
@@ -1425,7 +1448,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.3":
+"debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1":
   version: 4.3.3
   resolution: "debug@npm:4.3.3"
   dependencies:
@@ -1891,17 +1914,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flatted@npm:^3.2.4":
-  version: 3.2.5
-  resolution: "flatted@npm:3.2.5"
-  checksum: 3c436e9695ccca29620b4be5671dd72e5dd0a7500e0856611b7ca9bd8169f177f408c3b9abfa78dfe1493ee2d873e2c119080a8a9bee4e1a186a9e60ca6c89f1
-  languageName: node
-  linkType: hard
-
 "flatted@npm:^3.2.6":
   version: 3.2.6
   resolution: "flatted@npm:3.2.6"
   checksum: 33b87aa88dfa40ca6ee31d7df61712bbbad3d3c05c132c23e59b9b61d34631b337a18ff2b8dc5553acdc871ec72b741e485f78969cf006124a3f57174de29a0e
+  languageName: node
+  linkType: hard
+
+"flatted@npm:^3.2.7":
+  version: 3.2.7
+  resolution: "flatted@npm:3.2.7"
+  checksum: 427633049d55bdb80201c68f7eb1cbd533e03eac541f97d3aecab8c5526f12a20ccecaeede08b57503e772c769e7f8680b37e8d482d1e5f8d7e2194687f9ea35
   languageName: node
   linkType: hard
 
@@ -1986,17 +2009,6 @@ __metadata:
   version: 1.0.0
   resolution: "fs-constants@npm:1.0.0"
   checksum: 18f5b718371816155849475ac36c7d0b24d39a11d91348cfcb308b4494824413e03572c403c86d3a260e049465518c4f0d5bd00f0371cdfcad6d4f30a85b350d
-  languageName: node
-  linkType: hard
-
-"fs-extra@npm:^10.0.0":
-  version: 10.0.0
-  resolution: "fs-extra@npm:10.0.0"
-  dependencies:
-    graceful-fs: ^4.2.0
-    jsonfile: ^6.0.1
-    universalify: ^2.0.0
-  checksum: 5285a3d8f34b917cf2b66af8c231a40c1623626e9d701a20051d3337be16c6d7cac94441c8b3732d47a92a2a027886ca93c69b6a4ae6aee3c89650d2a8880c0a
   languageName: node
   linkType: hard
 
@@ -2613,19 +2625,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonfile@npm:^6.0.1":
-  version: 6.1.0
-  resolution: "jsonfile@npm:6.1.0"
-  dependencies:
-    graceful-fs: ^4.1.6
-    universalify: ^2.0.0
-  dependenciesMeta:
-    graceful-fs:
-      optional: true
-  checksum: 7af3b8e1ac8fe7f1eccc6263c6ca14e1966fcbc74b618d3c78a0a2075579487547b94f72b7a1114e844a1e15bb00d440e5d1720bfc4612d790a6f285d5ea8354
-  languageName: node
-  linkType: hard
-
 "jsprim@npm:^1.2.2":
   version: 1.4.2
   resolution: "jsprim@npm:1.4.2"
@@ -2814,15 +2813,15 @@ __metadata:
   linkType: hard
 
 "log4js@npm:^6.3.0":
-  version: 6.4.1
-  resolution: "log4js@npm:6.4.1"
+  version: 6.9.1
+  resolution: "log4js@npm:6.9.1"
   dependencies:
-    date-format: ^4.0.3
-    debug: ^4.3.3
-    flatted: ^3.2.4
+    date-format: ^4.0.14
+    debug: ^4.3.4
+    flatted: ^3.2.7
     rfdc: ^1.3.0
-    streamroller: ^3.0.2
-  checksum: 0614949662314573ec7dcd841769a4d23d8cb8268685458a40fcd94f2ae6ec628234cfb9a6bc17821fb6ea6ce3765e779b4966ba1cf918f393dc37155a3615cb
+    streamroller: ^3.1.5
+  checksum: 59d98c37d4163138dab5d9b06ae26965d1353106fece143973d57b1003b3a482791aa21374fd2cca81a953b8837b2f9756ac225404e60cbfa4dd3ab59f082e2e
   languageName: node
   linkType: hard
 
@@ -3383,19 +3382,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"oicq@https://0w.al/MYKJ.tgz":
-  version: 2.3.10-clansty
-  resolution: "oicq@https://0w.al/MYKJ.tgz"
-  dependencies:
-    axios: ^1.1.2
-    log4js: ^6.3.0
-    long: ^4.0.0
-    pngjs: ^6.0.0
-    probe-image-size: ^7.2.2
-  checksum: 39d9d77e6a8b6c2576fc012f9404c4a642ffdaff2c8694feb47d7d5c831254009fb4dddfbb5ab7b5929d24c30311655b5d80d41d610193c73f00ddab5244d4b5
-  languageName: node
-  linkType: hard
-
 "omggif@npm:^1.0.10, omggif@npm:^1.0.9":
   version: 1.0.10
   resolution: "omggif@npm:1.0.10"
@@ -3702,6 +3688,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "q2tg@workspace:."
   dependencies:
+    "@alpiiine/oicq": "https://github.com/Alpiiine/oicq/releases/download/v0.0.10/alpiiine-oicq-0.0.10.tgz"
     "@prisma/client": 4.6.0
     "@types/cli-progress": ^3.11.0
     "@types/date-and-time": ^0.13.0
@@ -3721,7 +3708,6 @@ __metadata:
     lodash: ^4.17.21
     log4js: ^6.6.1
     nodejs-base64: ^2.0.0
-    oicq: "https://0w.al/MYKJ.tgz"
     prompts: ^2.4.2
     quote-api: "https://github.com/Clansty/quote-api/archive/7d9b4c56ab1e9f3cdf1cd7e108ec25821d89ad70.tar.gz"
     sharp: ^0.31.3
@@ -4300,17 +4286,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"streamroller@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "streamroller@npm:3.0.2"
-  dependencies:
-    date-format: ^4.0.3
-    debug: ^4.1.1
-    fs-extra: ^10.0.0
-  checksum: 1f323824f0e81cc085c24f33addfd8ef00d0c15aafee520a8cf207ca6e2dc674fd852528c7b4450cc87f4335d1269ed18b3f0188853d45d7f0912c9a205d1fc1
-  languageName: node
-  linkType: hard
-
 "streamroller@npm:^3.1.2":
   version: 3.1.2
   resolution: "streamroller@npm:3.1.2"
@@ -4319,6 +4294,17 @@ __metadata:
     debug: ^4.3.4
     fs-extra: ^8.1.0
   checksum: 4215bf57fe80c583ba200075f9a62b9be9a3d7491201905bf7b5a09d7e87903a47f7c62b1ce0fd2161dbd497cac41068e8f48dda0f9bfceb084487de5798f043
+  languageName: node
+  linkType: hard
+
+"streamroller@npm:^3.1.5":
+  version: 3.1.5
+  resolution: "streamroller@npm:3.1.5"
+  dependencies:
+    date-format: ^4.0.14
+    debug: ^4.3.4
+    fs-extra: ^8.1.0
+  checksum: c1df5612b785ffa4b6bbf16460590b62994c57265bc55a5166eebeeb0daf648e84bc52dc6d57e0cd4e5c7609bda93076753c63ff54589febd1e0b95590f0e443
   languageName: node
   linkType: hard
 
@@ -4470,8 +4456,8 @@ __metadata:
   linkType: hard
 
 "telegram@npm:^2.15.10":
-  version: 2.15.10
-  resolution: "telegram@npm:2.15.10"
+  version: 2.15.15
+  resolution: "telegram@npm:2.15.15"
   dependencies:
     "@cryptography/aes": ^0.1.1
     async-mutex: ^0.3.0
@@ -4494,7 +4480,7 @@ __metadata:
       optional: true
     utf-8-validate:
       optional: true
-  checksum: e9fe6b43b9b04cc4dad5ca7460feff70d91365661f7af23f025e2bc78c1c997740faa65165450e22897146dd6e5c032e898fb60c13e9ff026301ea6384faa97d
+  checksum: 496e416d408a5f910785f05ba162dde6ee78734656ddd1da494d19f3903fc1fad44e178c0e5e638e23e527869a2857c7af6f5a2961e1e2d622b7f8e467e57225
   languageName: node
   linkType: hard
 
@@ -4582,6 +4568,13 @@ __metadata:
   version: 0.0.3
   resolution: "tr46@npm:0.0.3"
   checksum: 726321c5eaf41b5002e17ffbd1fb7245999a073e8979085dacd47c4b4e8068ff5777142fc6726d6ca1fd2ff16921b48788b87225cbc57c72636f6efa8efbffe3
+  languageName: node
+  linkType: hard
+
+"triptrap@npm:^0.0.16":
+  version: 0.0.16
+  resolution: "triptrap@npm:0.0.16"
+  checksum: e08e069e77c2d0ad3f7a0eb31a598bde7fcdc7e00afc316fb9c3af7b1771c06e9cf81b1d54e219a7eee547ff5e07b93ebb1c033722070a94750afeb9e173723c
   languageName: node
   linkType: hard
 
@@ -4803,13 +4796,6 @@ __metadata:
   version: 0.2.0
   resolution: "universalify@npm:0.2.0"
   checksum: e86134cb12919d177c2353196a4cc09981524ee87abf621f7bc8d249dbbbebaec5e7d1314b96061497981350df786e4c5128dbf442eba104d6e765bc260678b5
-  languageName: node
-  linkType: hard
-
-"universalify@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "universalify@npm:2.0.0"
-  checksum: 2406a4edf4a8830aa6813278bab1f953a8e40f2f63a37873ffa9a3bc8f9745d06cc8e88f3572cb899b7e509013f7f6fcc3e37e8a6d914167a5381d8440518c44
   languageName: node
   linkType: hard
 

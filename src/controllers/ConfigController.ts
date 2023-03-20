@@ -9,7 +9,7 @@ import {
   MemberDecreaseEvent,
   MemberIncreaseEvent,
   PrivateMessageEvent,
-} from 'oicq';
+} from '@alpiiine/oicq';
 import Instance from '../models/Instance';
 import { getLogger, Logger } from 'log4js';
 
@@ -35,6 +35,8 @@ export default class ConfigController {
   }
 
   private handleMessage = async (message: Api.Message) => {
+    console.log(message);
+    console.log(this.instance.owner)
     if (!message.sender.id.eq(this.instance.owner)) {
       return false;
     }

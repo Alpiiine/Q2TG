@@ -1,7 +1,7 @@
 import Instance from '../models/Instance';
 import Telegram from '../client/Telegram';
 import OicqClient from '../client/OicqClient';
-import { AtElem, Group, GroupMessageEvent, PrivateMessageEvent, Sendable } from 'oicq';
+import { AtElem, Group, GroupMessageEvent, PrivateMessageEvent, Sendable } from '@alpiiine/oicq';
 import { Pair } from '../models/Pair';
 import { Api } from 'telegram';
 import db from '../models/db';

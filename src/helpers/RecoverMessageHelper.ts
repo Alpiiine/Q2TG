@@ -3,7 +3,7 @@ import Telegram from '../client/Telegram';
 import OicqClient from '../client/OicqClient';
 import { Pair } from '../models/Pair';
 import { Api } from 'telegram';
-import { GroupMessage, PrivateMessage } from 'oicq';
+import { GroupMessage, PrivateMessage } from '@alpiiine/oicq';
 import db from '../models/db';
 import { format } from 'date-and-time';
 import lottie from '../constants/lottie';
@@ -203,11 +203,19 @@ export default class {
                   const hash = md5Hex(result.resId);
                   text += `转发的消息记录 ${process.env.CRV_API}/?hash=${hash}`;
                   // 传到 Cloudflare
+                  const header = {
+                    'Content-Type': 'application/json',
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15',
+                    'Accept': '*/*',
+                    'Accept-Language': 'en-US,en;q=0.9',
+                    'Accept-Encoding': 'gzip, deflate, br',
+                    'Connection': 'keep-alive',
+                  }
                   axios.post(`${process.env.CRV_API}/add`, {
                     auth: process.env.CRV_KEY,
                     key: hash,
                     data: messages,
-                  })
+                  }, { headers: header })
                     .then(data => this.log.trace('上传消息记录到 Cloudflare', data.data))
                     .catch(e => this.log.error('上传消息记录到 Cloudflare 失败', e));
                 }

@@ -19,7 +19,7 @@ import OicqErrorNotifyController from '../controllers/OicqErrorNotifyController'
 import { MarkupLike } from 'telegram/define';
 import { Button } from 'telegram/tl/custom/button';
 import { CustomFile } from 'telegram/client/uploads';
-import { QqBot } from '@prisma/client';
+
 import StatusReportController from '../controllers/StatusReportController';
 import HugController from '../controllers/HugController';
 import QuotLyController from '../controllers/QuotLyController';
@@ -30,7 +30,7 @@ export default class Instance {
   private _workMode = '';
   private _botSessionId = 0;
   private _userSessionId = 0;
-  private _qq: QqBot;
+  private _qq: any;
   private _reportUrl: string;
 
   private readonly log: Logger;

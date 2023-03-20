@@ -3,7 +3,7 @@ import { CustomFile } from 'telegram/client/uploads';
 import { base64decode } from 'nodejs-base64';
 import { getLogger } from 'log4js';
 import { Entity } from 'telegram/define';
-import { ForwardMessage } from 'oicq';
+import { ForwardMessage } from '@alpiiine/oicq';
 import { Api } from 'telegram';
 
 const log = getLogger('ForwardHelper');
@@ -72,6 +72,16 @@ export default {
       }
       catch (err) {
       }
+    } else if (jsonObj.app === 'com.tencent.qun.pro') {
+      try {
+        const prompt = jsonObj.prompt; // [频道邀请]
+        const creator = jsonObj.meta?.contact?.desc; // 创建人：example
+        const channelId = jsonObj.meta?.contact?.channelId; // 频道 ID
+        const channelName = jsonObj.meta?.contact?.guild_name; // 频道名称
+        const inviteLink = jsonObj.meta?.contact?.jumo_url; // 邀请链接
+        return { type: 'text', text: `${prompt}\n${creator}\n频道 ID：${channelId}\n频道名称：${channelName}\n邀请链接：${inviteLink}` };
+      } catch (err) {
+      }
     }
     let appurl: string;
     const biliRegex = /(https?:\\?\/\\?\/b23\.tv\\?\/\w*)\??/;
@@ -94,6 +104,7 @@ export default {
     }
     else {
       // TODO 记录无法解析的 JSON
+      log.info('无法解析的 JSON', json);
       return { type: 'text', text: '[JSON]' };
     }
   },

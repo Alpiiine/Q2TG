@@ -10,7 +10,7 @@ import {
   Quotable,
   segment,
   Sendable,
-} from 'oicq';
+} from '@alpiiine/oicq';
 import { fetchFile, getBigFaceUrl, getImageUrlByMd5 } from '../utils/urls';
 import { ButtonLike, FileLike } from 'telegram/define';
 import { getLogger, Logger } from 'log4js';
@@ -86,6 +86,9 @@ export default class ForwardService {
       if (event.message_type === 'group') {
         // 产生头部，这和工作模式没有关系
         sender = event.sender.card || event.sender.nickname;
+        if (event.sender.title){
+          sender = `[${event.sender.title}] ${sender}`;
+        }
         if (event.anonymous) {
           sender = `[${sender}]${event.anonymous.name}`;
         }
@@ -105,11 +108,19 @@ export default class ForwardService {
           const hash = md5Hex(resId);
           buttons.push(Button.url('📃查看', `${process.env.CRV_API}/?hash=${hash}`));
           // 传到 Cloudflare
+          const header = {
+            'Content-Type': 'application/json',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15',
+            'Accept': '*/*',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Connection': 'keep-alive',
+          }
           axios.post(`${process.env.CRV_API}/add`, {
             auth: process.env.CRV_KEY,
             key: hash,
             data: messages,
-          })
+          }, { headers: header})
             .then(data => this.log.trace('上传消息记录到 Cloudflare', data.data))
             .catch(e => this.log.error('上传消息记录到 Cloudflare 失败', e));
         }
@@ -173,6 +184,7 @@ export default class ForwardService {
             }
             catch (e) {
               this.log.error('下载媒体失败', e);
+              this.log.error(elem) //打印消息日志
               // 下载失败让 Telegram 服务器下载
               files.push(url);
             }

@@ -1,4 +1,4 @@
-import { Friend, Group } from 'oicq';
+import { Friend, Group } from '@alpiiine/oicq';
 
 export default async function getAboutText(entity: Friend | Group, html: boolean) {
   let text: string;

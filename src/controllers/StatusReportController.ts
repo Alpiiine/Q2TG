@@ -8,7 +8,7 @@ export default class {
               private readonly tgUser: Telegram,
               private readonly qqBot: OicqClient) {
     setInterval(() => this.report(), 1000 * 60);
-    this.report();
+    // this.report();
   }
 
   private async report() {
@@ -27,6 +27,6 @@ export default class {
     const url = new URL(this.instance.reportUrl);
     url.searchParams.set('status', online ? 'up' : 'down');
     url.searchParams.set('msg', online ? 'OK' : offline.join(','));
-    const res = await fetch(url);
+    // const res = await fetch(url);
   }
 }

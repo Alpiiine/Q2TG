@@ -1,4 +1,4 @@
-import { Platform } from 'oicq';
+import { Platform } from '@alpiiine/oicq';
 
 export default {
   convertTextToPlatform(text: string): Platform {

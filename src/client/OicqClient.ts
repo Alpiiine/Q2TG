@@ -7,13 +7,13 @@ import {
   LogLevel,
   Platform,
   PrivateMessageEvent,
-} from 'oicq';
+} from '@alpiiine/oicq';
 import Buffer from 'buffer';
 import { execSync } from 'child_process';
 import random from '../utils/random';
 import fs from 'fs';
 import fsP from 'fs/promises';
-import { Config } from 'oicq/lib/client';
+import { Config } from '@alpiiine/oicq/lib/client';
 import dataPath from '../helpers/dataPath';
 import os from 'os';
 
