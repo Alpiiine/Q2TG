@@ -24,7 +24,7 @@ services:
     image: 'public.ecr.aws/zinclabs/zinc:latest'
     restart: unless-stopped
   q2tg:
-    image: ghcr.io/clansty/q2tg:rainbowcat
+    image: ghcr.io/alpiiine/q2tg:rainbowcat
     container_name: main_q2tg
     restart: unless-stopped
     depends_on:

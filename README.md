@@ -2,10 +2,70 @@
 QQ 群与 Telegram 群相互转发的 bot
 
 ## 安装方法
+### 部署 Chat-Record-Viewer
 
-请看 [Wiki](https://github.com/Clansty/Q2TG/wiki/%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2)
+Q2TG 会使用这个 Chat-Record-Viewer 实例来保存和展示转发的多条消息记录
+
+1. 登录 Cloudflare 并创建一个 [KV 命名空间](https://dash.cloudflare.com/?to=/:account/workers/kv/namespaces)
+2. Fork 或者在自己账号下导入 [Chatrecord-viewer](https://github.com/Clansty/chatrecord-viewer-frontend)仓库。如果用[导入](https://github.com/new/import)的话，可以设置成私有
+3. [创建一个新的 Cloudflare Pages](https://dash.cloudflare.com/?to=/:account/pages/new)，选择刚刚 Fork 的仓库
+4. 设置构建命令为 `yarn build`，构建输出目录为 `dist`
+5. 在环境变量中设置一个名称为 `API_KEY` 的变量，值可以随机生成一串密钥，待会儿将作为 API Key
+6. 部署完成后，进入「设置」「函数」，将变量名称 `DATA_STORE` 绑定到前面创建的 KV 命名空间
+
+可选绑定域名
+
+### 获取 Telegram API ID
+
+1. 打开 [My Telegram Core](https://my.telegram.org/apps) 并登录
+2. 设置你应用的信息
+3. 提交后，可以获取 `api_id` 和 `api_hash`
+
+### 创建 Telegram 机器人
+
+如果你已经有了 Telegram Bot Token 并且已经确保关闭 Group Privacy，可以跳过此步骤
+
+1. 在 Telegram 中找到 [BotFather](https://t.me/botfather)
+2. 输入 `/newbot` 命令，根据提示创建一个新的机器人账号
+3. 输入 `/setprivacy` 命令，关闭你刚才创建的机器人账号的 Group Privacy
+
+### 部署 Q2TG v2
+
+需要准备一台安装了 Docker 和 docker-compose，能同时连接 QQ 和 Telegram 服务器，并能保持开启的机器
+
+Q2TG v2 需要 PostgreSQL，如果没有的话，会在 docker-compose 时创建一个。请确保服务器资源充足
+
+1. 在服务器上，创建一个文件夹用来保存 Q2TG 的数据
+2. 下载 [docker-compose.yaml](https://raw.githubusercontent.com/Alpiiine/Q2TG/rainbowcat/docker-compose.yaml)
+3. 修改下方的环境变量
+
+    ```yaml
+    - TG_API_ID=刚才获取的 api_id
+    - TG_API_HASH=刚才获取的 api_hash
+    - TG_BOT_TOKEN=刚才创建的 Bot Token
+    - DATABASE_URL=postgres://user:password@postgres/db_name
+    - CRV_API=第一步部署 Char-Record-Viewer 的地址加上 /api，比如说 https://example.pages.dev/api
+    - CRV_KEY=第一步设置的 API Key
+    # 如果不需要通过代理上网，则不需要下面两个变量
+    - PROXY_IP=代理服务器的 IP 地址
+    - PROXY_PORT=代理服务器的端口
+    ```
+
+4. `docker compose up -d`
 
 v2.x 版本同时需要机器人账号以及登录 Telegram 个人账号，需要自己注册 Telegram API ID，并且还需要配置一些辅助服务。如果没有条件，可以使用 [v1.x](https://github.com/Clansty/Q2TG/tree/main) 版本
+
+### 配置机器人
+由于个人模式可能会被 Telegram 封号（详见原 Repo issues），所以建议使用群组模式。
+
+1. 把 Telegram 机器人拉入 Telegram 群组，并设置为管理员。
+2. 私聊机器人 `/setup`，并选择`群组模式`。
+3. 输入要在 QQ 上使用的号码，然后输入密码。
+4. 如果出现登录验证，请按提示操作。
+5. 登录完成后，按提示登录 Telegram 个人账号。
+6. 登录完成后，发送 `/newinstance` 创建一个新的转发实例。
+7. 选择要转发的 QQ 群，然后选择要转发到的 Telegram 群。
+8. 完成配置。
 
 ## 支持的消息类型
 
