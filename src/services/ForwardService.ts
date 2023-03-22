@@ -38,7 +38,7 @@ import { QQMessageSent } from '../types/definitions';
 import ZincSearch from 'zincsearch-node';
 import { speech as AipSpeechClient } from 'baidu-aip-sdk';
 import random from '../utils/random';
-import { escapeXml } from 'oicq/lib/common';
+import { escapeXml } from '@alpiiine/oicq/lib/common';
 
 const NOT_CHAINABLE_ELEMENTS = ['flash', 'record', 'video', 'location', 'share', 'json', 'xml', 'poke'];
 
@@ -411,12 +411,19 @@ export default class ForwardService {
             });
           }
           const fake = await pair.qq.makeForwardMsg(msgList);
+          const xmlData = fake.data;
+
+          //parse xmlData
+          const xml = new DOMParser().parseFromString(xmlData, 'text/xml');
+          //get m_redid from xml
+          const m_resid = xml.getElementsByTagName('msg')[0].getAttribute('m_resid');
+          const tSum = xml.getElementsByTagName('msg')[0].getAttribute('tSum');
           chain.push({
             type: 'xml',
             id: 60,
             data: `<?xml version="1.0" encoding="utf-8"?>` +
               `<msg serviceID="35" templateID="1" action="viewMultiMsg" brief="[Spoiler 图片]"
- m_resid="${fake.resid}" m_fileName="${random.fakeUuid().toUpperCase()}" tSum="${fake.tSum}"
+ m_resid="${m_resid}" m_fileName="${random.fakeUuid().toUpperCase()}" tSum="${tSum}"
  sourceMsgId="0" url="" flag="3" adverSign="0" multiMsgFlag="0"><item layout="1"
  advertiser_id="0" aid="0"><title size="34" maxLines="2" lineSpace="12"
 >${escapeXml(messageHeader.substring(0, messageHeader.length - 2))}</title

@@ -68,8 +68,10 @@ export default class InChatCommandsService {
         else {
           const sender = await this.tgBot.getChat(message.sender);
           try {
-            await message.delete({ revoke: true });
-            await sender.sendMessage({
+            // /info 命令不再撤回
+            // await message.delete({ revoke: true });
+            // /info 命令直接在群聊中回复
+            await message.reply({
               message: textToSend,
               file: new CustomFile('avatar.png', avatar.length, '', avatar),
             });

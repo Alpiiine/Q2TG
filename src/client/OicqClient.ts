@@ -37,9 +37,11 @@ interface CreateOicqParams {
 // OicqExtended??
 export default class OicqClient extends Client {
   private readonly onMessageHandlers: Array<MessageHandler> = [];
+  private static readonly uin: number;
 
   private constructor(uin: number, public readonly id: number, conf?: Config) {
-    super(uin, conf);
+    super(conf);
+    this.uin = uin;
   }
 
   private static existedBots = {} as { [id: number]: OicqClient };
@@ -52,22 +54,12 @@ export default class OicqClient extends Client {
       async function loginDeviceHandler({ phone }: { url: string, phone: string }) {
         client.sendSmsCode();
         const code = await params.onVerifyDevice(phone);
-        if (code === 'qrsubmit') {
-          client.login();
-        }
-        else {
-          client.submitSmsCode(code);
-        }
+        client.submitSmsCode(code);
       }
 
       async function loginSliderHandler({ url }: { url: string }) {
         const res = await params.onVerifySlider(url);
-        if (res) {
-          client.submitSlider(res);
-        }
-        else {
-          client.login();
-        }
+        client.submitSlider(res);
       }
 
       async function loginQrCodeHandler({ image }: { image: Buffer }) {
@@ -80,36 +72,8 @@ export default class OicqClient extends Client {
       }
 
       function successLoginHandler() {
-        client.off('system.login.device', loginDeviceHandler)
-          .off('system.login.slider', loginSliderHandler)
-          .off('system.login.qrcode', loginQrCodeHandler)
-          .off('system.login.error', loginErrorHandler)
-          .off('system.online', successLoginHandler)
-          .on('message', client.onMessage);
+        client.on('message', client.onMessage);
         resolve(client);
-      }
-
-      if (!fs.existsSync(dataPath(`${params.uin}/device-${params.uin}.json`))) {
-        await fsP.mkdir(dataPath(params.uin.toString()), { recursive: true });
-
-        const device = {
-          product: 'Q2TG',
-          device: 'ANGELKAWAII2',
-          board: 'rainbowcat',
-          brand: random.pick('GOOGLE', 'XIAOMI', 'HUAWEI', 'SAMSUNG', 'SONY'),
-          model: 'rainbowcat',
-          wifi_ssid: random.pick('OpenWrt', `Redmi-${random.hex(4).toUpperCase()}`,
-            `MiWifi-${random.hex(4).toUpperCase()}`, `TP-LINK-${random.hex(6).toUpperCase()}`),
-          bootloader: random.pick('U-Boot', 'GRUB', 'gummiboot'),
-          android_id: random.hex(16),
-          proc_version: `${os.type()} version ${os.release()}`,
-          mac_address: `8c:85:90:${random.hex(2)}:${random.hex(2)}:${random.hex(2)}`.toUpperCase(),
-          ip_address: `192.168.${random.int(1, 200)}.${random.int(10, 250)}`,
-          incremental: random.int(0, 4294967295),
-          imei: random.imei(),
-        };
-
-        await fsP.writeFile(dataPath(`${params.uin}/device-${params.uin}.json`), JSON.stringify(device, null, 0), 'utf-8');
       }
 
       const client = new this(params.uin, params.id, {
@@ -118,15 +82,17 @@ export default class OicqClient extends Client {
         log_level: LOG_LEVEL,
         ffmpeg_path: process.env.FFMPEG_PATH,
         ffprobe_path: process.env.FFPROBE_PATH,
-      })
-        .on('system.login.device', loginDeviceHandler)
-        .on('system.login.slider', loginSliderHandler)
-        .on('system.login.qrcode', loginQrCodeHandler)
-        .on('system.login.error', loginErrorHandler)
-        .on('system.online', successLoginHandler);
+      });
+
+      client.on('system.login.device', loginDeviceHandler);
+      client.on('system.login.slider', loginSliderHandler);
+      client.on('system.login.error', loginErrorHandler);
 
       this.existedBots[params.id] = client;
-      client.login(params.password);
+      console.log('login', params.uin, params.password)
+      client.login(this.uin, String(params.password));
+
+      client.on('system.online', successLoginHandler);
     });
   }
 
